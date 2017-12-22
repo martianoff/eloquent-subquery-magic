@@ -5,7 +5,7 @@ class TestUser extends SubqueryMagicStub
     protected $table = 'users';
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     public function comments()

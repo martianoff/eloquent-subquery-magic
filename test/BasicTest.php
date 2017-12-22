@@ -4,11 +4,10 @@
  * Created by PhpStorm.
  * User: Maksim
  * Date: 6/21/2017
- * Time: 16:02
+ * Time: 16:02.
  */
 class BasicTest extends SubqueryMagicTestCase
 {
-
     public function __construct(string $name = null, array $data = [], string $dataName = '')
     {
         TestUser::truncate();
@@ -22,5 +21,4 @@ class BasicTest extends SubqueryMagicTestCase
         $user = TestUser::where('name', '=', 'John')->first();
         $this->assertNotNull($user);
     }
-
 }

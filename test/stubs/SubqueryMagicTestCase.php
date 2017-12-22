@@ -3,14 +3,12 @@
  * Created by PhpStorm.
  * User: Maksim
  * Date: 12/22/2017
- * Time: 14:29
+ * Time: 14:29.
  */
-
 use Illuminate\Support\Facades\DB;
 
 abstract class SubqueryMagicTestCase extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * Is SQL allowed to be issued?
      *
