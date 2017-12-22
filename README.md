@@ -1,6 +1,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/maksimru/eloquent-subquery-magic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/maksimru/eloquent-subquery-magic/?branch=master)
 [![codecov](https://codecov.io/gh/maksimru/eloquent-subquery-magic/branch/master/graph/badge.svg)](https://codecov.io/gh/maksimru/eloquent-subquery-magic)
 [![CircleCI](https://circleci.com/gh/maksimru/eloquent-subquery-magic.svg?style=svg)](https://circleci.com/gh/maksimru/eloquent-subquery-magic)
+[![StyleCI](https://styleci.io/repos/115099101/shield?branch=master)](https://styleci.io/repos/115099101)
 
 ## About
 
