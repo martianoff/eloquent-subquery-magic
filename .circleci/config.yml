@@ -14,6 +14,9 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
       - run:
+          name: Install PHP extensions
+          command: sudo docker-php-ext-install pdo_mysql
+      - run:
           name: Install composer packages
           command: |
             composer install -n --prefer-dist --no-interaction --no-plugins --no-scripts
