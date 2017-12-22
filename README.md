@@ -1,11 +1,29 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/maksimru/eloquent-subquery-magic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/maksimru/eloquent-subquery-magic/?branch=master)
 [![codecov](https://codecov.io/gh/maksimru/eloquent-subquery-magic/branch/master/graph/badge.svg)](https://codecov.io/gh/maksimru/eloquent-subquery-magic)
-[![CircleCI](https://circleci.com/gh/maksimru/eloquent-subquery-magic.svg?style=svg)](https://circleci.com/gh/maksimru/eloquent-subquery-magic)
 [![StyleCI](https://styleci.io/repos/115099101/shield?branch=master)](https://styleci.io/repos/115099101)
+[![CircleCI](https://circleci.com/gh/maksimru/eloquent-subquery-magic.svg?style=svg)](https://circleci.com/gh/maksimru/eloquent-subquery-magic)
 
 ## About
 
 Library extends Laravel's Eloquent ORM with various helpful sub query operations such as leftJoinSubquery or fromSubquery and provide clean methods to use Eloquent without raw statements
+
+## Usage
+
+No installation required
+
+Simply add SubqueryMagic trait into your models
+
+```php
+
+use Illuminate\Database\Eloquent\Model;
+use MaksimM\SubqueryMagic\SubqueryMagic;
+
+class SomeModel extends Model
+{
+    use SubqueryMagic;
+}
+
+```
 
 ## Installation
 
