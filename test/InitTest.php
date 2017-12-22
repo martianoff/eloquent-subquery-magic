@@ -6,11 +6,10 @@ use MaksimM\SubqueryMagic\SubqueryMagic;
  * Created by PhpStorm.
  * User: Maksim
  * Date: 6/21/2017
- * Time: 16:02
+ * Time: 16:02.
  */
 class InitTest extends SubqueryMagicTestCase
 {
-
     public function testIsInitiallyEmpty()
     {
         $traitObj = new TraitImplementationClass();
@@ -20,11 +19,12 @@ class InitTest extends SubqueryMagicTestCase
         $this->assertContains('LeftJoinSubquery', $booted_methods);
     }
 
-    function accessProtected($obj, $prop)
+    public function accessProtected($obj, $prop)
     {
         $reflection = new ReflectionClass($obj);
         $property = $reflection->getProperty($prop);
         $property->setAccessible(true);
+
         return $property->getValue($obj);
     }
 }

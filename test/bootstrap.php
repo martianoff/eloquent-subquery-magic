@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+
+require __DIR__.'/../vendor/autoload.php';
 
 use Illuminate\Container\Container;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,24 +14,24 @@ Container::setInstance($container);
 $container->bind('config', function () {
     return new Illuminate\Config\Repository([
         'database' => [
-            'default' => 'mysql',
+            'default'     => 'mysql',
             'connections' => [
                 'mysql' => [
-                    'driver' => 'mysql',
-                    'database' => env('DB_DATABASE', 'subquery_magic_test'),
-                    'username' => env('DB_USERNAME', 'root'),
-                    'password' => env('DB_PASSWORD', 'root'),
-                    'charset' => 'utf8',
+                    'driver'    => 'mysql',
+                    'database'  => env('DB_DATABASE', 'subquery_magic_test'),
+                    'username'  => env('DB_USERNAME', 'root'),
+                    'password'  => env('DB_PASSWORD', 'root'),
+                    'charset'   => 'utf8',
                     'collation' => 'utf8_unicode_ci',
-                    'prefix' => '',
-                    'host' => env('DB_HOST', '127.0.0.1'),
-                    'port' => env('DB_PORT', 3306),
-                    'strict' => true,
-                    'engine' => null,
+                    'prefix'    => '',
+                    'host'      => env('DB_HOST', '127.0.0.1'),
+                    'port'      => env('DB_PORT', 3306),
+                    'strict'    => true,
+                    'engine'    => null,
                 ],
             ],
             'fetch' => PDO::FETCH_CLASS,
-        ]
+        ],
     ]);
 });
 
@@ -47,7 +48,7 @@ $container->singleton('events', function ($app) {
 $capsule->bootEloquent();
 $builder = $capsule->getConnection()->getSchemaBuilder();
 
-$capsule->getConnection()->query('CREATE SCHEMA IF NOT EXISTS ' . env('DB_DATABASE', 'subquery_magic_test'));
+$capsule->getConnection()->query('CREATE SCHEMA IF NOT EXISTS '.env('DB_DATABASE', 'subquery_magic_test'));
 $builder->dropIfExists('users');
 $builder->create('users', function (Blueprint $table) {
     $table->increments('id');
