@@ -61,7 +61,7 @@ class SubqueryTest extends SubqueryMagicTestCase
                 ->where('id', '!=', $excluded_id),
             'info'
         );
-        $this->assertEquals("select info.min_id,info.max_id,info.total_count from (select min(id) min_id,max(id) max_id,count(*) total_count from `users` where `id` != $excluded_id) `info`", $this->interpolateEloquent($user_info_query));
+        $this->assertEquals("select info.min_id,info.max_id,info.total_count from (select min(id) min_id,max(id) max_id,count(*) total_count from `users` where `id` != $excluded_id) `info`", $this->interpolateEloquent($user_info_query), "", 0, 10, false, true);
     }
 
     public function testLeftJoinSubquerySql()
@@ -75,7 +75,7 @@ class SubqueryTest extends SubqueryMagicTestCase
         $example_user = $users_with_comments_count->first();
         $this->assertInstanceOf(TestUser::class, $example_user);
         $this->assertGreaterThanOrEqual(0, $example_user->total_count);
-        $this->assertEquals("SELECT name,comments_by_user.total_count FROM `users` LEFT JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` LIMIT 1", $this->interpolateEloquent($users_with_comments_count));
+        $this->assertEquals("SELECT name,comments_by_user.total_count FROM `users` LEFT JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` LIMIT 1", $this->interpolateEloquent($users_with_comments_count), "", 0, 10, false, true);
     }
 
     public function testRightJoinSubquerySql()
@@ -89,7 +89,7 @@ class SubqueryTest extends SubqueryMagicTestCase
         $example_user = $users_with_comments_count->first();
         $this->assertInstanceOf(TestUser::class, $example_user);
         $this->assertGreaterThanOrEqual(0, $example_user->total_count);
-        $this->assertEquals("SELECT name,comments_by_user.total_count FROM `users` RIGHT JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` LIMIT 1", $this->interpolateEloquent($users_with_comments_count));
+        $this->assertEquals("SELECT name,comments_by_user.total_count FROM `users` RIGHT JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` LIMIT 1", $this->interpolateEloquent($users_with_comments_count), "", 0, 10, false, true);
     }
 
     public function testJoinSubquerySql()
@@ -103,20 +103,20 @@ class SubqueryTest extends SubqueryMagicTestCase
         $example_user = $users_with_comments_count->first();
         $this->assertInstanceOf(TestUser::class, $example_user);
         $this->assertGreaterThanOrEqual(0, $example_user->total_count);
-        $this->assertEquals("SELECT name,comments_by_user.total_count FROM `users` INNER JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` LIMIT 1", $this->interpolateEloquent($users_with_comments_count));
+        $this->assertEquals("SELECT name,comments_by_user.total_count FROM `users` INNER JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` LIMIT 1", $this->interpolateEloquent($users_with_comments_count), "", 0, 10, false, true);
     }
 
     public function testWhereInSubquerySql()
     {
         $users_having_comments = TestUser::whereInSubquery('id', TestComment::selectRaw('distinct(user_id)'));
         $this->assertEquals(TestComment::selectRaw('count(distinct(user_id)) users_count')->first()->users_count, $users_having_comments->count());
-        $this->assertEquals("SELECT * FROM `users` WHERE `id` IN (SELECT DISTINCT(user_id) FROM `comments`)", $this->interpolateEloquent($users_having_comments));
+        $this->assertEquals("SELECT * FROM `users` WHERE `id` IN (SELECT DISTINCT(user_id) FROM `comments`)", $this->interpolateEloquent($users_having_comments), "", 0, 10, false, true);
     }
 
     public function testWhereNotInSubquerySql()
     {
         $users_without_comments = TestUser::whereNotInSubquery('id', TestComment::selectRaw('distinct(user_id)'));
-        $this->assertEquals("SELECT * FROM `users` WHERE `id` NOT IN (SELECT DISTINCT(user_id) FROM `comments`)", $this->interpolateEloquent($users_without_comments));
+        $this->assertEquals("SELECT * FROM `users` WHERE `id` NOT IN (SELECT DISTINCT(user_id) FROM `comments`)", $this->interpolateEloquent($users_without_comments), "", 0, 10, false, true);
     }
 
     public function testOrWhereInSubquery()
@@ -126,7 +126,7 @@ class SubqueryTest extends SubqueryMagicTestCase
             $nested_query->where('id', '<', 10);
             $nested_query->orWhereInSubquery('id', TestComment::selectRaw('distinct(user_id)'));
         });
-        $this->assertEquals("SELECT * FROM `users` WHERE (`id` < 10 OR `id` IN (SELECT DISTINCT(user_id) FROM `comments`))", $this->interpolateEloquent($users_having_comments));
+        $this->assertEquals("SELECT * FROM `users` WHERE (`id` < 10 OR `id` IN (SELECT DISTINCT(user_id) FROM `comments`))", $this->interpolateEloquent($users_having_comments), "", 0, 10, false, true);
     }
 
     public function testOrWhereNotInSubquery()
@@ -136,7 +136,7 @@ class SubqueryTest extends SubqueryMagicTestCase
             $nested_query->where('id', '<', 10);
             $nested_query->orWhereNotInSubquery('id', TestComment::selectRaw('distinct(user_id)'));
         });
-        $this->assertEquals("SELECT * FROM `users` WHERE (`id` < 10 OR `id` NOT IN (SELECT DISTINCT(user_id) FROM `comments`))", $this->interpolateEloquent($users_without_comments));
+        $this->assertEquals("SELECT * FROM `users` WHERE (`id` < 10 OR `id` NOT IN (SELECT DISTINCT(user_id) FROM `comments`))", $this->interpolateEloquent($users_without_comments), "", 0, 10, false, true);
     }
 
     public function testComplexSubquery()
@@ -159,6 +159,6 @@ class SubqueryTest extends SubqueryMagicTestCase
             }
             );
         $this->assertInstanceOf(TestUser::class, $complex_subquery->first());
-        $this->assertEquals("SELECT users.name,filtered_members_with_stats.total_count FROM `users` RIGHT JOIN (SELECT user_id,comments_by_user.total_count FROM `users` LEFT JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` WHERE `id` < 10) `filtered_members_with_stats` ON `users`.`id` = `filtered_members_with_stats`.`user_id` WHERE (`id` < 20 OR `id` NOT IN (SELECT DISTINCT(user_id) FROM `comments`)) LIMIT 1", $this->interpolateEloquent($complex_subquery));
+        $this->assertEquals("SELECT users.name,filtered_members_with_stats.total_count FROM `users` RIGHT JOIN (SELECT user_id,comments_by_user.total_count FROM `users` LEFT JOIN (SELECT user_id,count(*) total_count FROM `comments` GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id` WHERE `id` < 10) `filtered_members_with_stats` ON `users`.`id` = `filtered_members_with_stats`.`user_id` WHERE (`id` < 20 OR `id` NOT IN (SELECT DISTINCT(user_id) FROM `comments`)) LIMIT 1", $this->interpolateEloquent($complex_subquery), "", 0, 10, false, true);
     }
 }
