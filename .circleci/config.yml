@@ -15,7 +15,7 @@ jobs:
           - v1-dependencies-
       - run:
           name: Install PHP extensions
-          command: sudo docker-php-ext-install pdo_mysql
+          command: sudo docker-php-ext-install pdo_mysql xdebug
       - run:
           name: Install composer packages
           command: |
