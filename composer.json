@@ -1,5 +1,5 @@
 {
-  "name": "maksimru/laravel-subquery-magic",
+  "name": "maksimru/eloquent-subquery-magic",
   "type": "library",
   "description": "Eloquent extension providing ability to use a lot of subquery functions like fromSubquery or leftJoinSubquery",
   "keywords": [

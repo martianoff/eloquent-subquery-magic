@@ -6,6 +6,12 @@
 
 Library extends Laravel's Eloquent ORM with various helpful sub query operations such as leftJoinSubquery or fromSubquery and provide clean methods to use Eloquent without raw statements
 
+## Installation
+
+```bash
+composer require maksimru/eloquent-subquery-magic
+```
+
 ### Supported operations (with examples)
 
 1) leftJoinSubquery
