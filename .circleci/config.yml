@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/php:7.1.8-browsers
+      - image: circleci/mysql:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run:
+          name: Install composer packages
+          command: |
+            composer install -n --prefer-dist --no-interaction --no-plugins --no-scripts
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+
+      - run:
+          name: Wait for mysql launch
+          command: |
+            dockerize -wait tcp://localhost:3306 -timeout 1m
+            nc -z 127.0.0.1 3306
+      - run:
+          name: Tests
+          command: |
+            vendor/bin/phpunit --verbose --configuration phpunit.xml --coverage-clover=coverage.xml
+
+      - run:
+          name: Coverage Report
+          command: |
+            bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN

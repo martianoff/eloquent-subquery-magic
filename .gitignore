@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Composer template
+composer.phar
+/vendor/
+composer.lock
+.phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php
+.idea

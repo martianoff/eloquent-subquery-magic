@@ -1,0 +1,36 @@
+{
+  "name": "maksimru/laravel-subquery-magic",
+  "type": "library",
+  "description": "Eloquent extension providing ability to use a lot of subquery functions like fromSubquery or leftJoinSubquery",
+  "keywords": [
+    "subquery",
+    "eloquent",
+    "laravel",
+    "magic"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maksim Martianov",
+      "email": "maxmtmn@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "laravel/framework": "~5.2|~5.3|~5.4|~5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.5|~6.0",
+    "fzaninotto/faker": "~1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "MaksimM\\SubqueryMagic\\": "src/SubqueryMagic"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "test/stubs/"
+    }
+  }
+}
