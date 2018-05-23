@@ -30,7 +30,7 @@ class SubqueryMagicScope implements Scope
      * Apply the scope to a given Eloquent query builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     * @param \Illuminate\Database\Eloquent\Model   $model
+     * @param \Illuminate\Database\Eloquent\Model            $model
      *
      * @return void
      */
@@ -62,7 +62,7 @@ class SubqueryMagicScope implements Scope
     protected function addLeftJoinSubquery($builder)
     {
         $builder->macro('leftJoinSubquery', function ($builder, $subquery, $alias, \Closure $on) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
@@ -76,8 +76,8 @@ class SubqueryMagicScope implements Scope
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     * @param array $bindings
-     * @param string $type
+     * @param array                                          $bindings
+     * @param string                                         $type
      */
     private function addBindings($builder, $bindings, $type = 'where')
     {
@@ -94,7 +94,7 @@ class SubqueryMagicScope implements Scope
     protected function addRightJoinSubquery($builder)
     {
         $builder->macro('rightJoinSubquery', function ($builder, $subquery, $alias, \Closure $on) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
@@ -116,7 +116,7 @@ class SubqueryMagicScope implements Scope
     protected function addJoinSubquery($builder)
     {
         $builder->macro('joinSubquery', function ($builder, $subquery, $alias, \Closure $on) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
@@ -138,7 +138,7 @@ class SubqueryMagicScope implements Scope
     protected function addWhereInSubquery($builder)
     {
         $builder->macro('whereInSubquery', function ($builder, $field, $subquery) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
@@ -160,7 +160,7 @@ class SubqueryMagicScope implements Scope
     protected function addWhereNotInSubquery($builder)
     {
         $builder->macro('whereNotInSubquery', function ($builder, $field, $subquery) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
@@ -182,7 +182,7 @@ class SubqueryMagicScope implements Scope
     protected function addOrWhereInSubquery($builder)
     {
         $builder->macro('orWhereInSubquery', function ($builder, $field, $subquery) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
@@ -204,7 +204,7 @@ class SubqueryMagicScope implements Scope
     protected function addOrWhereNotInSubquery($builder)
     {
         $builder->macro('orWhereNotInSubquery', function ($builder, $field, $subquery) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
@@ -226,7 +226,7 @@ class SubqueryMagicScope implements Scope
     protected function addFromSubquery($builder)
     {
         $builder->macro('fromSubquery', function ($builder, $subquery, $alias) {
-            /**
+            /*
              * @var $builder \Illuminate\Database\Eloquent\Builder|Relation
              * @var $subquery \Illuminate\Database\Eloquent\Builder|Relation
              */
