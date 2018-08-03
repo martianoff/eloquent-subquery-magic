@@ -53,6 +53,16 @@ class SubqueryMagicScope implements Scope
     }
 
     /**
+     * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
+     * @param array $bindings
+     * @param string $type
+     */
+    private function addBindings($builder, $bindings, $type = 'where')
+    {
+        $builder->addBinding($bindings, $type);
+    }
+
+    /**
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
@@ -68,20 +78,10 @@ class SubqueryMagicScope implements Scope
              */
             $builder->leftJoin(DB::raw('('.$subquery->toSql().') '.$builder->getQuery()->getGrammar()->wrap($alias)), $on);
             //merge bindings from subquery
-            $this->addBindings($builder, $subquery->getBindings());
+            $this->addBindings($builder, $subquery->getBindings(), 'join');
 
             return $builder;
         });
-    }
-
-    /**
-     * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     * @param array                                          $bindings
-     * @param string                                         $type
-     */
-    private function addBindings($builder, $bindings, $type = 'where')
-    {
-        $builder->addBinding($bindings, $type);
     }
 
     /**
@@ -100,7 +100,7 @@ class SubqueryMagicScope implements Scope
              */
             $builder->rightJoin(DB::raw('('.$subquery->toSql().') '.$builder->getQuery()->getGrammar()->wrap($alias)), $on);
             //merge bindings from subquery
-            $this->addBindings($builder, $subquery->getBindings());
+            $this->addBindings($builder, $subquery->getBindings(), 'join');
 
             return $builder;
         });
@@ -122,7 +122,7 @@ class SubqueryMagicScope implements Scope
              */
             $builder->join(DB::raw('('.$subquery->toSql().') '.$builder->getQuery()->getGrammar()->wrap($alias)), $on);
             //merge bindings from subquery
-            $this->addBindings($builder, $subquery->getBindings());
+            $this->addBindings($builder, $subquery->getBindings(), 'join');
 
             return $builder;
         });
@@ -144,7 +144,7 @@ class SubqueryMagicScope implements Scope
              */
             $builder->whereRaw($builder->getQuery()->getGrammar()->wrap($field).' IN ('.$subquery->toSql().')');
             //merge bindings from subquery
-            $this->addBindings($builder, $subquery->getBindings());
+            $this->addBindings($builder, $subquery->getBindings(), 'where');
 
             return $builder;
         });
@@ -166,7 +166,7 @@ class SubqueryMagicScope implements Scope
              */
             $builder->whereRaw($builder->getQuery()->getGrammar()->wrap($field).' NOT IN ('.$subquery->toSql().')');
             //merge bindings from subquery
-            $this->addBindings($builder, $subquery->getBindings());
+            $this->addBindings($builder, $subquery->getBindings(), 'where');
 
             return $builder;
         });
@@ -188,7 +188,7 @@ class SubqueryMagicScope implements Scope
              */
             $builder->orWhereRaw($builder->getQuery()->getGrammar()->wrap($field).' IN ('.$subquery->toSql().')');
             //merge bindings from subquery
-            $this->addBindings($builder, $subquery->getBindings());
+            $this->addBindings($builder, $subquery->getBindings(), 'where');
 
             return $builder;
         });
@@ -210,7 +210,7 @@ class SubqueryMagicScope implements Scope
              */
             $builder->orWhereRaw($builder->getQuery()->getGrammar()->wrap($field).' NOT IN ('.$subquery->toSql().')');
             //merge bindings from subquery
-            $this->addBindings($builder, $subquery->getBindings());
+            $this->addBindings($builder, $subquery->getBindings(), 'where');
 
             return $builder;
         });

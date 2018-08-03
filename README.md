@@ -152,8 +152,8 @@ RIGHT JOIN
              count(*) total_count
       FROM `comments`
       GROUP BY `user_id`) `comments_by_user` ON `users`.`id` = `comments_by_user`.`user_id`
-   WHERE `id` < 10) `filtered_members_with_stats` ON `users`.`id` = `filtered_members_with_stats`.`user_id`
-WHERE (`id` < 20
+   WHERE `id` < 20) `filtered_members_with_stats` ON `users`.`id` = `filtered_members_with_stats`.`user_id`
+WHERE (`id` < 10
        OR `id` NOT IN
          (SELECT distinct(user_id)
           FROM `comments`))
