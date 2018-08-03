@@ -54,8 +54,8 @@ class SubqueryMagicScope implements Scope
 
     /**
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     * @param array $bindings
-     * @param string $type
+     * @param array                                          $bindings
+     * @param string                                         $type
      */
     private function addBindings($builder, $bindings, $type = 'where')
     {
