@@ -17,7 +17,6 @@ return PhpCsFixer\Config::create()
     ->setRules($rules)
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->in('src')
             ->exclude($excludes)
             ->notName('README.md')
             ->notName('*.xml')
