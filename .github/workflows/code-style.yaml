@@ -1,7 +1,9 @@
 name: Code Style Fixer
 
 on:
-  [pull_request]
+  pull_request:
+    paths:
+      - '**.php'
 
 jobs:
   php-cs-fixer:
