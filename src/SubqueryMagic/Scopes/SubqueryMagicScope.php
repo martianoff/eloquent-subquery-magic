@@ -31,8 +31,6 @@ class SubqueryMagicScope implements Scope
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
      * @param \Illuminate\Database\Eloquent\Model            $model
-     *
-     * @return void
      */
     public function apply(Builder $builder, Model $model)
     {
@@ -42,8 +40,6 @@ class SubqueryMagicScope implements Scope
      * Extend the query builder with the needed functions.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     public function extend(Builder $builder)
     {
@@ -66,8 +62,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addLeftJoinSubquery($builder)
     {
@@ -88,8 +82,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addRightJoinSubquery($builder)
     {
@@ -110,8 +102,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addJoinSubquery($builder)
     {
@@ -132,8 +122,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addWhereInSubquery($builder)
     {
@@ -154,8 +142,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addWhereNotInSubquery($builder)
     {
@@ -176,8 +162,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addOrWhereInSubquery($builder)
     {
@@ -198,8 +182,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addOrWhereNotInSubquery($builder)
     {
@@ -220,8 +202,6 @@ class SubqueryMagicScope implements Scope
      * Add extension to the builder.
      *
      * @param \Illuminate\Database\Eloquent\Builder|Relation $builder
-     *
-     * @return void
      */
     protected function addFromSubquery($builder)
     {
