@@ -1,7 +1,7 @@
 name: Code Quality Analyze
 
 on:
-  [pull_request, push]
+  [pull_request]
 
 jobs:
   php-insight:
@@ -13,4 +13,14 @@ jobs:
         run: composer global require nunomaduro/phpinsights
 
       - name: Configure PATH
-        run: export PATH="$PATH:$HOME/.composer/vendor/bin" && phpinsights analyse --no-interaction -v --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src
+        run: export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+      - name: Perform Analyze
+        run: echo "##[set-output name=phpinsights;]" && phpinsights analyse --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src
+        id: analyze
+
+      - name: Create commit comment
+        uses: peter-evans/commit-comment@v1.0.1
+        with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            body: ${{ steps.analyze.outputs.phpinsights }}
