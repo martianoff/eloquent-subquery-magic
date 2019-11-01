@@ -1,0 +1,16 @@
+name: Code Quality Analyze
+
+on:
+  [pull_request, push]
+
+jobs:
+  php-insight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Prepare phpinsights
+        run: composer global require nunomaduro/phpinsights
+
+      - name: Configure PATH
+        run: export PATH="$PATH:$HOME/.composer/vendor/bin" && phpinsights analyse --no-interaction -v --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src
