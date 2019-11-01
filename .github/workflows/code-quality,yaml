@@ -13,7 +13,7 @@ jobs:
         run: composer global require nunomaduro/phpinsights
 
       - name: Perform analyze
-        run: export PATH="$PATH:$HOME/.composer/vendor/bin" && echo "::set-output name=phpinsights::$(phpinsights analyse --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src)"
+        run: export PATH="$PATH:$HOME/.composer/vendor/bin" && phpinsights analyse --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src > tmp.txt && sed 's/^/::set-output name=phpinsights::/' tmp.txt && unlink tmp.txt
         id: analyze
 
       - name: Create commit comment
