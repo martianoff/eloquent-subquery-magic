@@ -56,9 +56,9 @@ return [
     ],
     'config' => [
         LineLengthSniff::class => [
-            'lineLimit' => 80,
+            'lineLimit'         => 80,
             'absoluteLineLimit' => 120,
-            'ignoreComments' => true,
+            'ignoreComments'    => true,
         ],
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',
