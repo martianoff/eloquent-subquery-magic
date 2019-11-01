@@ -27,9 +27,9 @@ jobs:
             echo "::set-output name=summary-security::$(jq '.summary."security issues"' tmp.js)"
         id: analyze
 
-       - name: Comment PR
-         uses: thollander/actions-comment-pull-request
-         with:
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request
+        with:
             message: |
                 | Code | Complexity | Architecture | Style | Security |
                 |------|------------|--------------|-------|----------|
