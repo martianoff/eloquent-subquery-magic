@@ -12,8 +12,8 @@ jobs:
       - name: Prepare phpinsights
         run: composer global require nunomaduro/phpinsights
 
-      - name: Perform Analyze
-        run: export PATH="$PATH:$HOME/.composer/vendor/bin" && echo "##[set-output name=phpinsights;]" && phpinsights analyse --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src
+      - name: Perform analyze
+        run: export PATH="$PATH:$HOME/.composer/vendor/bin" && echo "##[set-output name=phpinsights;]$(phpinsights analyse --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src)"
         id: analyze
 
       - name: Create commit comment
