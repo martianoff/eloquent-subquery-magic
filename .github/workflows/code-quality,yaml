@@ -12,12 +12,26 @@ jobs:
       - name: Prepare phpinsights
         run: composer global require nunomaduro/phpinsights
 
+      - name: Install jq
+        run: |
+          sudo apt-get -y install jq
+
       - name: Perform analyze
-        run: export PATH="$PATH:$HOME/.composer/vendor/bin" && phpinsights analyse --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 src > tmp.txt && sed 's/^/::set-output name=phpinsights::/' tmp.txt && unlink tmp.txt
+        run: |
+            export PATH="$PATH:$HOME/.composer/vendor/bin"
+            phpinsights analyse --no-interaction --min-quality=80 --min-complexity=80 --min-architecture=80 --min-style=80 --format json src > tmp.js
+            echo "::set-output name=summary-code::$(jq '.summary.code' tmp.js)"
+            echo "::set-output name=summary-complexity::$(jq '.summary.complexity' tmp.js)"
+            echo "::set-output name=summary-architecture::$(jq '.summary.architecture' tmp.js)"
+            echo "::set-output name=summary-style::$(jq '.summary.style' tmp.js)"
+            echo "::set-output name=summary-security::$(jq '.summary."security issues"' tmp.js)"
         id: analyze
 
-      - name: Create commit comment
-        uses: peter-evans/commit-comment@v1.0.1
-        with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            body: ${{ steps.analyze.outputs.phpinsights }}
+       - name: Comment PR
+         uses: thollander/actions-comment-pull-request
+         with:
+            message: |
+                | Code | Complexity | Architecture | Style | Security |
+                |------|------------|--------------|-------|----------|
+                | ${{ steps.analyze.outputs.summary-code }} | ${{ steps.analyze.outputs.summary-complexity }} | ${{ steps.analyze.outputs.summary-architecture }} | ${{ steps.analyze.outputs.summary-style }} | ${{ steps.analyze.outputs.summary-security }} |
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
