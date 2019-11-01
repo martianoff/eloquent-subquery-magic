@@ -32,7 +32,7 @@ jobs:
         with:
             message: |
                 ### Code Review Analysis is ready
-                | Code | Complexity | Architecture | Style | Security |
-                |------|------------|--------------|-------|----------|
+                | Code | Complexity | Architecture | Style | Security Issues |
+                |------|------------|--------------|-------|-----------------|
                 | ${{ steps.analyze.outputs.summary-code }} | ${{ steps.analyze.outputs.summary-complexity }} | ${{ steps.analyze.outputs.summary-architecture }} | ${{ steps.analyze.outputs.summary-style }} | ${{ steps.analyze.outputs.summary-security }} |
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
